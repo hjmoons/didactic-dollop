@@ -1,6 +1,6 @@
-package com.example.demo.member.service;
+package com.example.demo.member;
 
-import com.example.demo.member.model.Member;
+import com.example.demo.member.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

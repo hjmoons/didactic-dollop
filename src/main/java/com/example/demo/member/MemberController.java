@@ -1,7 +1,5 @@
-package com.example.demo.member.controller;
+package com.example.demo.member;
 
-import com.example.demo.member.model.Member;
-import com.example.demo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,7 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping
-    public List<Member> getUsers() {
-        return memberService.getAllUsers();
+    public List<Member> getMembers() {
+        return memberService.getMembers();
     }
 }
