@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class TodoCreateRequest {
     private String title;
-    private Boolean completed;
 }

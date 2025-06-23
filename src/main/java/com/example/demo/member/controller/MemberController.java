@@ -4,6 +4,7 @@ import com.example.demo.member.domain.dto.MemberCreateRequest;
 import com.example.demo.member.domain.dto.MemberUpdateRequest;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.member.domain.entity.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +18,8 @@ import java.util.List;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberService memberService;
-
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    @Autowired
+    private MemberService memberService;
 
     @PostMapping
     public ResponseEntity<Member> create(@RequestBody MemberCreateRequest request) {
