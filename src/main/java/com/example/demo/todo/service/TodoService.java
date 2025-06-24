@@ -36,7 +36,6 @@ public class TodoService {
                 .orElseThrow(() -> new IllegalArgumentException("Todo not found"));
 
         todo.setTitle(todoUpdateRequest.getTitle());
-        todo.setCompleted(todoUpdateRequest.getCompleted());
 
         return todoRepository.save(todo);
     }
@@ -48,5 +47,11 @@ public class TodoService {
         todo.setCompleted(!todo.isCompleted());
 
         return todoRepository.save(todo);
+    }
+
+    public void deleteTodo(Long id) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Todo not found"));
+        todoRepository.delete(todo);
     }
 }

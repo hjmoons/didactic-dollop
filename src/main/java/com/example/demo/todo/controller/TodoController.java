@@ -4,6 +4,7 @@ import com.example.demo.todo.domain.dto.TodoCreateRequest;
 import com.example.demo.todo.domain.dto.TodoUpdateRequest;
 import com.example.demo.todo.domain.entity.Todo;
 import com.example.demo.todo.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class TodoController {
     private TodoService todoService;
 
     @PostMapping
-    public ResponseEntity<Todo> create(@RequestBody TodoCreateRequest todoCreateRequest) {
+    public ResponseEntity<Todo> create(@RequestBody @Valid TodoCreateRequest todoCreateRequest) {
         Todo todo = todoService.createTodo(todoCreateRequest);
         return ResponseEntity.ok(todo);
     }
@@ -36,8 +37,8 @@ public class TodoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Todo> update(@PathVariable Long id, @RequestBody TodoUpdateRequest todoUpdateRequest) {
+    @PatchMapping("/{id}")
+    public ResponseEntity<Todo> update(@PathVariable Long id, @RequestBody @Valid TodoUpdateRequest todoUpdateRequest) {
         Todo todo = todoService.updateTodo(id, todoUpdateRequest);
         return ResponseEntity.ok(todo);
     }
@@ -46,5 +47,11 @@ public class TodoController {
     public ResponseEntity<Todo> updateToggle(@PathVariable Long id) {
         Todo todo = todoService.updateToggleTodo(id);
         return ResponseEntity.ok(todo);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        todoService.deleteTodo(id);
+        return ResponseEntity.noContent().build();
     }
 }
