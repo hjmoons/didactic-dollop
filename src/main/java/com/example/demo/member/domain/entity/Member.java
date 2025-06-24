@@ -11,9 +11,12 @@ import lombok.*;
 @Builder
 public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long id;
+
+    @Column(unique = true)
+    private String username;
+    private String password;
 
     private String name;
     private String email;

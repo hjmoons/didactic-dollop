@@ -21,12 +21,6 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping
-    public ResponseEntity<Member> create(@RequestBody MemberCreateRequest request) {
-        Member member = memberService.createMember(request);
-        return ResponseEntity.ok(member);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Member> get(@PathVariable Long id) {
         return memberService.getMember(id)
