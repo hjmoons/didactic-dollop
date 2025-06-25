@@ -1,7 +1,6 @@
 package com.example.demo.member.service;
 
 import com.example.demo.member.domain.dto.LoginRequest;
-import com.example.demo.member.domain.dto.MemberCreateRequest;
 import com.example.demo.member.domain.dto.MemberUpdateRequest;
 import com.example.demo.member.domain.dto.RegisterRequest;
 import com.example.demo.member.domain.entity.Member;
@@ -31,8 +30,8 @@ public class MemberService {
             throw new RuntimeException("이미 존재하는 사용자입니다.");
         }
         Member member = Member.builder()
-                .name(request.getUsername())
-                .email(passwordEncoder.encode(request.getPassword()))
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         return memberRepository.save(member);
     }
