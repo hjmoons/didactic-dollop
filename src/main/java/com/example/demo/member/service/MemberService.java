@@ -1,6 +1,7 @@
 package com.example.demo.member.service;
 
 import com.example.demo.exception.LoginFailedException;
+import com.example.demo.exception.RegisterFailedException;
 import com.example.demo.member.domain.dto.LoginRequest;
 import com.example.demo.member.domain.dto.MemberUpdateRequest;
 import com.example.demo.member.domain.dto.RegisterRequest;
@@ -28,7 +29,7 @@ public class MemberService {
 
     public Member register(RegisterRequest request) {
         if (memberRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("이미 존재하는 사용자입니다.");
+            throw new RegisterFailedException("이미 존재하는 사용자입니다.");
         }
         Member member = Member.builder()
                 .username(request.getUsername())

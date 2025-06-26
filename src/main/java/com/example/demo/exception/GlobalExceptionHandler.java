@@ -20,4 +20,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleLoginFailedError(LoginFailedException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
+
+    @ExceptionHandler(RegisterFailedException.class)
+    public ResponseEntity<String> handleRegisterFailedError(RegisterFailedException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }
