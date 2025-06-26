@@ -4,3 +4,11 @@ CREATE TABLE todo (
     title VARCHAR(255),
     completed boolean default 0
 );
+
+CREATE TABLE member (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) not null,
+    password VARCHAR(255) not null,
+    name VARCHAR(255),
+    email VARCHAR(255)
+)

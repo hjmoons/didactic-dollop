@@ -1,5 +1,6 @@
 package com.example.demo.member.service;
 
+import com.example.demo.exception.LoginFailedException;
 import com.example.demo.member.domain.dto.LoginRequest;
 import com.example.demo.member.domain.dto.MemberUpdateRequest;
 import com.example.demo.member.domain.dto.RegisterRequest;
@@ -38,10 +39,10 @@ public class MemberService {
 
     public String login(LoginRequest request) {
         Member member = memberRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("사용자 없음"));
+                .orElseThrow(() -> new LoginFailedException("등록된 ID가 없습니다.\n회원가입을 해주세요."));
 
         if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
-            throw new RuntimeException("비밀번호 불일치");
+            throw new LoginFailedException("비밀번호가 틀렸습니다.");
         }
 
         return jwtUtil.generateToken(member.getUsername());

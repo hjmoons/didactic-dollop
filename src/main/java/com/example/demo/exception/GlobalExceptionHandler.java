@@ -15,4 +15,9 @@ public class GlobalExceptionHandler {
                 .getDefaultMessage(); // 첫 번째 오류 메시지만 추출
         return ResponseEntity.badRequest().body(errorMessage);
     }
+
+    @ExceptionHandler(LoginFailedException.class)
+    public ResponseEntity<String> handleLoginFailedError(LoginFailedException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
 }
