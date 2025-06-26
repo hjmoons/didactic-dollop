@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 없음
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login", "/auth/register").permitAll() // 로그인, 회원가입은 인증 필요 없음
+                        .requestMatchers("/auth/**").permitAll() // 로그인, 회원가입은 인증 필요 없음
                         .anyRequest().authenticated() // 그 외는 모두 인증 필요
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
