@@ -3,6 +3,7 @@ package com.example.demo.member.controller;
 import com.example.demo.member.domain.dto.LoginRequest;
 import com.example.demo.member.domain.dto.RegisterRequest;
 import com.example.demo.member.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class AuthController {
     private MemberService memberService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request) {
         memberService.register(request);
         return ResponseEntity.ok("회원가입 성공");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) {
         String token = memberService.login(request);
         return ResponseEntity.ok(Map.of("token", token));
     }
