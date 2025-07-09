@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: MyApp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: MyApp
+  template:
+    metadata:
+      labels:
+        app: MyApp
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/hjmoons/todo-app-backend:latest
+          ports:
+            - containerPort: 8080
