@@ -19,3 +19,9 @@ spec:
           image: ghcr.io/hjmoons/todo-app-backend:latest
           ports:
             - containerPort: 8080
+              name: backend-port
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "250Mi"
