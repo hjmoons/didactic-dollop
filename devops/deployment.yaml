@@ -47,7 +47,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: demo-secret
-                  key: DB_USER
+                  key: DB_USERNAME
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
