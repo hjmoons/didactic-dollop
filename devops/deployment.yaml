@@ -25,3 +25,31 @@ spec:
               memory: "100Mi"
             limits:
               memory: "250Mi"
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prd
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
+                  key: DB_NAME
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: demo-secret
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: demo-secret
+                  key: DB_PASSWORD
