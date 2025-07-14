@@ -14,7 +14,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  gradle-build:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,7 +34,7 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew bootJar
 
-  docker-build:
+  push:
     runs-on: ubuntu-latest
     needs: build
 
