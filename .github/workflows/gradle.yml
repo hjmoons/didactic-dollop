@@ -72,6 +72,7 @@ jobs:
       - name: Update image tage
         run: |
           cd argocd-deploy
+          ls -al
           sed -i "s|ghcr.io/${{ github.repository_owner }}/todo-app-backend:.*|ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}|" back/deployment.yaml
 
       - name: Push changed Content
