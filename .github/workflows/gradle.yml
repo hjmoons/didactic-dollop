@@ -59,8 +59,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Repository Git Clone
-        run: git clone --depth 1 --branch main https://x-access-token:${{ secrets.GIT_TOKEN }}@https://github.com/${{ github.repository_owner }}/argocd-deploy.git prev
+      - name: Git Login
+        run: |
+          git config --global user.name 'hjmoons'
+          git config --global user.email 'gywhd408@naver.com'
+
+      - name: Clone Deploy Repository
+        run: git clone --depth 1 --branch main https://github.com/${{ github.repository_owner }}/argocd-deploy.git
+        env:
+          PAT: ${{ secrets.GIT_TOKEN }}
 
       - name: Update image tage
         run: |
@@ -69,5 +76,8 @@ jobs:
 
       - name: Push changed Content
         run: |
+          git add .
           git commit -m "Update deploy image tag to ${{ github.sha }}"
           git push
+        env:
+          PAT: ${{ secrets.GIT_TOKEN }}
