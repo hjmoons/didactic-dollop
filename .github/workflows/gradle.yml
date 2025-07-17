@@ -59,6 +59,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set Git Config
+        run: |
+          git config --global user.name ${{ github.repository_owner }}
+
       - name: Clone Deploy Repository
         run: |
           git clone --depth 1 --branch main https://${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository_owner }}/argocd-deploy.git
