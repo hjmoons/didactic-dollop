@@ -59,10 +59,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Update config repo
+      - name: Deploy Repository Git Clone
+        run: git clone --depth 1 --branch main https://x-access-token:${{ secrets.GIT_TOKEN }}@https://github.com/${{ github.repository_owner }}/argocd-deploy.git prev
+
+      - name: Update image tage
         run: |
-          git clone https://github.com/${{ github.repository_owner }}/argocd-deploy.git
           cd argocd-deploy
           sed -i "s|ghcr.io/${{ github.repository_owner }}/todo-app-backend:.*|ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}|" back/deployment.yaml
-          git commit -m "Update deploy image tag to ${GITHUB_SHA}"
+
+      - name: Push changed Content
+        run: |
+          git commit -m "Update deploy image tag to ${{ github.sha }}"
           git push
