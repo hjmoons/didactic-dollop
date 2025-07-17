@@ -50,7 +50,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}
+        tags: ghcr.io/${{ github.repository_owner }}/myapp-backend:${{ github.sha }}
         platforms: |
           linux/amd64
           linux/arm64
@@ -70,7 +70,7 @@ jobs:
       - name: Update image tage
         run: |
           cd argocd-deploy
-          sed -i "s|ghcr.io/${{ github.repository_owner }}/todo-app-backend:.*|ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}|" ./back/deployment.yaml
+          sed -i "s|ghcr.io/${{ github.repository_owner }}/myapp-backend:.*|ghcr.io/${{ github.repository_owner }}/myapp-backend:${{ github.sha }}|" ./back/deployment.yaml
 
           git add .
           git commit -m "Update deploy image tag to ${{ github.sha }}"
