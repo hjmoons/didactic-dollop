@@ -61,6 +61,9 @@ jobs:
     steps:
       - name: Update Deploy Docker Image Tag
         run: |
+          git config --global user.name 'hjmoons'
+          git config --global user.email 'gywhd408@naver.com'
+          
           git clone --depth 1 --branch main https://github.com/${{ github.repository_owner }}/argocd-deploy.git
         
           cd argocd-deploy
