@@ -59,28 +59,19 @@ jobs:
 #    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set Git Config
+      - name: Update Deploy Docker Image Tag
         run: |
           git config --global user.name 'hjmoons'
           git config --global user.email 'gywhd408@naver.com'
-
-      - name: Clone Deploy Repository
-        run: |
+          
           git clone --depth 1 --branch main https://github.com/${{ github.repository_owner }}/argocd-deploy.git
+        
           cd argocd-deploy
-        env:
-          PAT: ${{ secrets.GIT_TOKEN }}
+          
+          sed -i "s|ghcr.io/${{ github.repository_owner }}/todo-app-backend:.*|ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}|" back/deployment.yaml
 
-      - name: Update image tage
-        run: |
-          pwd
-          sed -i "s|ghcr.io/${{ github.repository_owner }}/todo-app-backend:.*|ghcr.io/${{ github.repository_owner }}/todo-app-backend:${{ github.sha }}|" ./back/deployment.yaml
-          cat back/deployment.yaml
-
-      - name: Push changed Content
-        run: | 
           git add .
           git commit -m "Update deploy image tag to ${{ github.sha }}"
-          git push
+          git push origin main
         env:
           PAT: ${{ secrets.GIT_TOKEN }}
