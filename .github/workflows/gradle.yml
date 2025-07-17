@@ -75,4 +75,4 @@ jobs:
 
           git add .
           git commit -m "Update deploy image tag to ${{ github.sha }}"
-          git push origin main https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/argocd-deploy.git
+          git push origin main
